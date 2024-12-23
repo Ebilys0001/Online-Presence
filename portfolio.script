@@ -1,0 +1,61 @@
+// Wait for the DOM to fully load
+document.addEventListener("DOMContentLoaded", () => {
+  // Form Validation
+  const form = document.getElementById("contact-form");
+  form.addEventListener("submit", (e) => {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    
+    if (!name || !email) {
+      e.preventDefault();
+      alert("Please fill out all required fields.");
+    }
+  });
+
+  // Interactive Profile Image Hover Effect
+  const profileImg = document.querySelector(".summary img");
+  profileImg.addEventListener("mouseenter", () => {
+    profileImg.style.transform = "scale(1.5)";
+    profileImg.style.transition = "transform 0.3s ease";
+  });
+
+  profileImg.addEventListener("mouseleave", () => {
+    profileImg.style.transform = "scale(1)";
+  });
+
+  // Skill Level Update (Accessible via Console)
+  const updateSkillLevel = (skill, newLevel) => {
+    const rows = document.querySelectorAll("#skills tr");
+    rows.forEach((row) => {
+      const cells = row.children;
+      if (cells[0]?.textContent === skill) {
+        cells[1].textContent = newLevel;
+      }
+    });
+  };
+  window.updateSkillLevel = updateSkillLevel; // Expose function globally
+
+  // Scroll to Top Button
+  const scrollTopBtn = document.createElement("button");
+  scrollTopBtn.textContent = "Top";
+  scrollTopBtn.style.position = "fixed";
+  scrollTopBtn.style.bottom = "20px";
+  scrollTopBtn.style.right = "20px";
+  scrollTopBtn.style.padding = "10px";
+  scrollTopBtn.style.border = "none";
+  scrollTopBtn.style.borderRadius = "5px";
+  scrollTopBtn.style.backgroundColor = "#2F5A78";
+  scrollTopBtn.style.color = "#fff";
+  scrollTopBtn.style.cursor = "pointer";
+  scrollTopBtn.style.display = "none";
+
+  document.body.appendChild(scrollTopBtn);
+
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  window.addEventListener("scroll", () => {
+    scrollTopBtn.style.display = window.scrollY > 200 ? "block" : "none";
+  });
+});

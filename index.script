@@ -1,0 +1,45 @@
+// Smooth scrolling for navigation links
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            window.scrollTo({
+                top: targetSection.offsetTop - 50,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Dynamic portfolio project hover effect
+const portfolioProjects = document.querySelectorAll('.project');
+
+portfolioProjects.forEach(project => {
+    project.addEventListener('mouseover', () => {
+        project.style.transform = 'translateY(-10px)';
+        project.style.transition = 'all 0.3s ease';
+    });
+
+    project.addEventListener('mouseout', () => {
+        project.style.transform = 'translateY(0)';
+    });
+});
+
+// Contact email validation
+document.addEventListener('DOMContentLoaded', () => {
+    const contactLink = document.querySelector('#contact a');
+    contactLink.addEventListener('click', (e) => {
+        if (!contactLink.href.includes('mailto')) {
+            alert('Invalid email link');
+        }
+    });
+});
+
+// Social media hover alert
+document.querySelectorAll('.social-media a').forEach(icon => {
+    icon.addEventListener('mouseover', () => {
+        console.log(`You are hovering over ${icon.getAttribute('aria-label')}`);
+    });
+});
